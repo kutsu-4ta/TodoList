@@ -2,32 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'input_page.dart';
 import 'list_store.dart';
-import 'todo.dart';
+import '../../../models/todo.dart';
 
-/// Todoリスト画面のクラス
-///
-/// 以下の責務を持つ
-/// ・Todoリスト画面の状態を生成する
 class TodoListPage extends StatefulWidget {
-  /// コンストラクタ
   const TodoListPage({Key? key}) : super(key: key);
 
-  /// Todoリスト画面の状態を生成する
   @override
   State<TodoListPage> createState() => _TodoListPageState();
 }
 
-/// Todoリスト画面の状態クラス
-///
-/// 以下の責務を持つ
-/// ・Todoリストを表示する
-/// ・Todoの追加/編集画面へ遷移する
-/// ・Todoの削除を行う
 class _TodoListPageState extends State<TodoListPage> {
-  /// ストア
   final TodoListStore _store = TodoListStore();
 
-  /// Todoリスト入力画面に遷移する
   void _pushTodoInputPage([Todo? todo]) async {
     await Navigator.of(context).push(
       MaterialPageRoute(
@@ -37,11 +23,9 @@ class _TodoListPageState extends State<TodoListPage> {
       ),
     );
 
-    // Todoの追加/更新を行う場合があるため、画面を更新する
     setState(() {});
   }
 
-  /// 初期処理を行う
   @override
   void initState() {
     super.initState();
@@ -54,13 +38,12 @@ class _TodoListPageState extends State<TodoListPage> {
     );
   }
 
-  /// 画面を作成する
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         // アプリケーションバーに表示するタイトル
-        title: const Text('Todoリスト'),
+        title: const Text('Todo'),
       ),
       body: ListView.builder(
         // Todoの件数をリストの件数とする
@@ -115,9 +98,8 @@ class _TodoListPageState extends State<TodoListPage> {
                 // 完了か
                 trailing: Checkbox(
                   // チェックボックスの状態
-                  value: item.done,
+                  value: item.isDone,
                   onChanged: (bool? value) {
-                    // Todo(完了か)を更新し、画面を更新する
                     setState(() => _store.update(item, value!));
                   },
                 ),

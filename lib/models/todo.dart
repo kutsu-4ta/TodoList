@@ -1,43 +1,36 @@
-/// Todoモデルのクラス
 ///
-/// 以下の責務を持つ
-/// ・Todoのプロパティを持つ
+/// [説明] Todoモデル
+///
+
 class Todo {
-  /// ID
   late int id;
-
-  /// タイトル
   late String title;
-
-  /// 詳細
   late String detail;
-
-  /// 完了か
-  late bool done;
-
-  /// 作成日時
+  late String category;
+  late String purpose;
+  late bool isDone;
   late String createDate;
-
-  /// 更新日時
   late String updateDate;
 
-  /// コンストラクタ
   Todo(
       this.id,
       this.title,
       this.detail,
-      this.done,
+      this.category,
+      this.purpose,
+      this.isDone,
       this.createDate,
       this.updateDate,
       );
 
-  /// TodoモデルをMapに変換する(保存時に使用)
   Map toJson() {
     return {
       'id': id,
       'title': title,
       'detail': detail,
-      'done': done,
+      'category': category,
+      'purpose': purpose,
+      'isDone': isDone,
       'createDate': createDate,
       'updateDate': updateDate
     };
@@ -48,7 +41,9 @@ class Todo {
     id = json['id'];
     title = json['title'];
     detail = json['detail'];
-    done = json['done'];
+    category = json['category'];
+    purpose = json['purpose'];
+    isDone = json['isDone'];
     createDate = json['createDate'];
     updateDate = json['updateDate'];
   }
